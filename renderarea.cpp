@@ -31,6 +31,29 @@ QPointF RenderArea::compute_astroid(float t)
     return QPointF(x, y);
 }
 
+void RenderArea::on_shape_changed()
+{
+    switch (mShape)
+    {
+        case Astroid:
+            mScale = 40;
+            mIntervalLength = 2 * M_PI;
+            break;
+
+        case Cycloid:
+            break;
+
+        case HuygensCycloid:
+            break;
+
+        case HypoCycloid:
+            break;
+
+        default:
+            break;
+    }
+}
+
 void RenderArea::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event);
@@ -39,27 +62,6 @@ void RenderArea::paintEvent(QPaintEvent *event)
 
     painter.setRenderHint(QPainter::Antialiasing, true);
 
-    switch (mShape)
-    {
-        case Astroid:
-            mBackgroundColor = Qt::red;
-            break;
-
-        case Cycloid:
-        mBackgroundColor = Qt::green;
-            break;
-
-        case HuygensCycloid:
-        mBackgroundColor = Qt::blue;
-            break;
-
-        case HypoCycloid:
-        mBackgroundColor = Qt::yellow;
-            break;
-
-        default:
-            break;
-    }
 
     painter.setBrush(mBackgroundColor);
     painter.setPen(mShapeColor);
@@ -69,17 +71,16 @@ void RenderArea::paintEvent(QPaintEvent *event)
 
     QPoint center = this->rect().center();
     int stepCount = 256;
-    float scale = 40;
-    float intervalLength = 2 * M_PI;
-    float step = intervalLength / stepCount;
 
-    for( float t = 0; t < intervalLength; t += step)
+    float step = mIntervalLength / stepCount;
+
+    for( float t = 0; t < mIntervalLength; t += step)
     {
         QPointF point = compute_astroid(t);
 
         QPoint pixel;
-        pixel.setX(point.x() * scale + center.x());
-        pixel.setY(point.y() * scale + center.y());
+        pixel.setX(point.x() * mScale + center.x());
+        pixel.setY(point.y() * mScale + center.y());
 
         painter.drawPoint(pixel);
     }

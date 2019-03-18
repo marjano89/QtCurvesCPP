@@ -18,7 +18,7 @@ public:
     void setBackgroundColor(QColor color) { mBackgroundColor = color; }
     QColor backgroundColor() const { return mBackgroundColor; }
 
-    void setShape(ShapeType shape) { mShape = shape; }
+    void setShape(ShapeType shape) { mShape = shape; on_shape_changed();}
     ShapeType shape() const { return mShape; }
 
 protected:
@@ -30,10 +30,14 @@ public slots:
 
 private:
     QPointF compute_astroid(float t);
+    void on_shape_changed();
 
     QColor mBackgroundColor;
     QColor mShapeColor;
     ShapeType mShape;
+
+    float mScale;
+    float mIntervalLength;
 };
 
 #endif // RENDERAREA_H
