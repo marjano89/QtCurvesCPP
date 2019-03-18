@@ -12,3 +12,27 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
+
+void MainWindow::on_btnAstroid_clicked()
+{
+    ui->renderArea->setShape(RenderArea::Astroid);
+    ui->renderArea->repaint();
+}
+
+void MainWindow::on_btnCycloid_clicked()
+{
+    ui->renderArea->setShape(RenderArea::Cycloid);
+    ui->renderArea->repaint();
+}
+
+void MainWindow::on_btnHuygens_clicked()
+{
+    ui->renderArea->setShape(RenderArea::HuygensCycloid);
+    ui->renderArea->repaint();
+}
+
+void MainWindow::on_btnHypo_clicked()
+{
+    ui->renderArea->setShape(RenderArea::HypoCycloid);
+    ui->renderArea->repaint();
+}
