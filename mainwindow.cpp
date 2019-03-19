@@ -36,3 +36,9 @@ void MainWindow::on_btnHypo_clicked()
     ui->renderArea->setShape(RenderArea::HypoCycloid);
     ui->renderArea->repaint();
 }
+
+void MainWindow::on_btnLine_clicked()
+{
+    ui->renderArea->setShape(RenderArea::Line);
+    ui->renderArea->repaint();
+}
